@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Logout - Charity unVigil Donation Tracker{% endblock %}
+
+{% block content %}
+<section class="pad-bottom">
+    <h1>Confirm Logout</h1>
+    <p>
+    You won't be able to donate to events or see more info until you log back in.
+    Are you sure you want to logout?
+    </p>
+    <form method="post">
+        {% csrf_token %}
+        <div class="input-div">
+            <input type="submit" value="Logout" class="button-good">
+        </div>
+    </form>
+</section>
+<section>
+    <p><a href="/">Go back...</a></p>
+</section>
+{% endblock %}

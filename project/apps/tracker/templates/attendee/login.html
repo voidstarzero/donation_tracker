@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Login - Charity unVigil Donation Tracker{% endblock %}
+
+{% block content %}
+<section class="pad-bottom">
+    <h1>Login to the Donation Portal</h1>
+    <p>
+    To donate to events, or to see more info, please login. If you don't already have
+    an account, please
+    <a href="/attendee/create">
+        click here to create a new account.
+    </a>
+    </p>
+    <form method="post">
+        {% csrf_token %}
+        <div class="pad-bottom">
+            <label for="username-field">Username:</label>
+            <input name="username" id="username-field" type="text"
+                                                       minlength="3"
+                                                       maxlength="15">
+        </div>
+        <div class="pad-bottom">
+            <label for="password-field">Password:</label>
+            <input name="password" id="password-field" type="password"
+                                                       minlength="8"
+                                                       maxlength="50">
+        </div>
+        <div class="input-div">
+            <input type="submit" value="Login" class="button-good">
+        </div>
+    </form>
+</section>
+<section>
+    <p><a href="/">Go back...</a></p>
+</section>
+{% endblock %}

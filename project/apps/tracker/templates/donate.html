@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Donate to Charity unVigil{% endblock %}
+
+{% block content %}
+<section class="pad-bottom">
+    <h1>Donate to an Event</h1>
+    <p>
+    <em>Don't have enough balance? <a href="/pay">Add more here.</a></em>
+    </p>
+    <form method="post">
+        {% csrf_token %}
+        <div class="pad-bottom">
+            <label for="event-selector">Event:</label>
+            <select name="event" id="event-selector">
+                {% for event in events %}
+                <option value="{{ event.ref_name }}"
+                        {% if event.ref_name == selected %}selected{% endif %}>
+                    {{ event.full_name }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="pad-bottom">
+            <label for="amount-box">Amount:</label>
+            $<input name="amount" id="amount-box" type="number" value="5" min="1" max="50">
+        </div>
+        <div class="input-div">
+            <input type="submit" value="Donate!" class="button-good">
+        </div>
+    </form>
+</section>
+<section>
+    <p><a href="/">Go back...</a></p>
+</section>
+{% endblock %}

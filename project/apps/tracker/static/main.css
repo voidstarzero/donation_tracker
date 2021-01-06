@@ -1,0 +1,307 @@
+body {
+    margin: 0;
+    background-color: #f8f8f8;
+    color: #1a1a1d;
+    font-family: sans-serif;
+}
+
+#fixed-banner {
+    position: fixed;
+    width: 100%;
+}
+
+#scroll-content {
+    padding-top: 6.75rem;
+}
+
+.edge-padding {
+    padding: 0 1rem;
+}
+
+.edge-padding > * {
+    max-width: 64rem;
+    margin: 1rem auto;
+}
+
+header {
+    opacity: 100%;
+    background-color: white;
+    border: 1px solid #1a1a1d;
+    border-radius: 0.75rem;
+}
+
+header > * {
+    padding: 0.75rem 1.2rem;
+}
+
+main section {
+    background-color: white;
+    padding: 0.1rem 1.2rem;
+    border: 1px solid #c5d1c9;
+    border-radius: 1rem;
+    margin: 1rem 0;
+}
+
+footer > * {
+    padding: 0 1.2rem;
+}
+
+h1, h2, h3 {
+    line-height: 1.2em;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+h1 {
+    font-size: 2em;
+}
+
+h2 {
+    font-size: 1.5em;
+}
+
+h3 {
+    font-size: 1.15em;
+}
+
+#header-content {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#header-content > * {
+    align-self: center;
+}
+
+#header-content > *:first-child {
+    margin-left: 0;
+    flex-grow: 1;
+}
+
+#header-content > *:last-child {
+    margin-right: 0;
+}
+
+.button-vstack {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-right: 0.27em;
+}
+
+.button-vstack > * {
+    align-self: center;
+    margin-top: 0.2em;
+}
+
+.button-vstack > *:first-child {
+    margin-top: 0;
+}
+
+.button-vstack * {
+    width: 100%;
+}
+
+button,
+input[type=submit] {
+    padding: 0.2em 0.5em;
+    font-size: 1rem;
+    border: 1px solid;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+#button-donate {
+    font-size: 2rem;
+    height: 4.125rem;
+}
+
+.button-warn {
+    border-color: #ff5d6c;
+    background-color: #fbceb5;
+}
+
+.button-info {
+    border-color: #6c5dff;
+    background-color: #b5cefb;
+}
+
+.button-good {
+    border-color: #52de97;
+    background-color: #c0ffb3;
+}
+
+.text-good {
+    color: #12cf23;
+}
+
+#donation-total {
+    font-size: 1.3em;
+    text-align: right;
+}
+
+.multi-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    padding: 0.2rem 0.5rem;
+    border-bottom: 1px solid #1a1a1d;
+}
+
+.multi-row:hover {
+    background-color: #eaeaea;
+}
+
+.multi-row:first-child {
+    border-top: 1px solid #1a1a1d;
+}
+
+.multi-row > *{
+    padding-left: 0.5em;
+    white-space: nowrap;
+}
+
+.multi-row > *:first-child {
+    font-style: italic;
+    flex-grow: 1;
+    white-space: normal;
+    padding-left: 0;
+}
+
+.multi-row > *:last-child {
+    text-align: right;
+}
+
+.multi-row > span:last-child {
+    min-width: 11rem;
+}
+
+.multi-row > strong:last-child {
+    min-width: 6rem;
+}
+
+a {
+    color: #0074d9;
+}
+
+a:visited {
+    color: #df5d1a;
+}
+
+.content-button {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1rem;
+}
+
+.content-button > * {
+    align-self: center;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.content-button > *:first-child {
+    margin-left: 0;
+    flex-grow: 1;
+}
+
+.content-columns {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.content-columns > *:first-child {
+    flex-grow: 1;
+}
+
+.content-columns > *:last-child {
+    text-align: right;
+    white-space: nowrap;
+}
+
+.content-columns + p {
+    margin-top: 0;
+}
+
+.logo-container {
+    padding-left: 0.5rem;
+    max-width: 40%;
+    align-self: center;
+}
+
+.logo {
+    max-height: 120px;
+    max-width: 100%;
+}
+
+section.club-title {
+    padding-top: 1rem;
+}
+
+section.club-title h1 {
+    margin-top: 0;
+}
+
+.pad-bottom {
+    padding-bottom: 1.2rem;
+}
+
+label {
+    font-weight: bold;
+    cursor: text;
+}
+
+form {
+    text-align: center;
+}
+
+.input-div {
+    text-align: right;
+}
+
+select {
+    width: 12rem;
+    -moz-appearance: textfield;
+    cursor: pointer;
+    height: 34px;
+}
+
+input[type=text],
+input[type=email],
+input[type=password] {
+    width: 12rem;
+    height: 34px;
+    border: 1px solid #aaaaaa;
+    border-radius: 0.25rem;
+    padding: 0 0.5rem;
+    font-size: 1rem;
+}
+
+input[type=number] {
+    width: 4rem;
+    height: 34px;
+    margin-left: 0.125rem;
+    font-size: 1em;
+    padding: 0;
+}
+
+hr.form-rule {
+    margin: 1rem 0;
+}
+
+input[type=checkbox] + label {
+    font-weight: normal;
+}
+
+.right {
+    text-align: right;
+}
+
+.payment-row {
+    color: forestgreen;
+}
+
+.pad-vertical {
+    padding-top: 1.2rem;
+    padding-bottom: 1.2rem;
+}

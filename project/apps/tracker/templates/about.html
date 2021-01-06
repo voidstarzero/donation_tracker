@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}About Charity unVigil 2020{% endblock %}
+
+{% block content %}
+<section>
+    <h1>Charity <sup>un</sup>Vigil Goes Online in 2020!</h1>
+    <p>
+    Each year, the clubs of Cameron Hall band themselves together for a celebration
+    of our activities, and fundraising for vital local charities.
+    </p>
+    <p>
+    This year we're bringing charity to you in a new online format, with <em>Charity
+        <sup>un</sup>Vigil</em>. Running across multiple nights in week 10, each of the
+    clubs will be hosting an evening of fundraising activities to support
+    <a href="https://zontahouse.org.au/">Zonta House</a>, a Perth-based organisation
+    supporting women affected by domestic violence.
+    </p>
+</section>
+<section>
+    <h2>Meet the Clubs</h2>
+    {% for club in clubs %}
+    <h3>{{ club.short_name }}</h3>
+    <p>{{ club.description|truncatewords:24 }}</p>
+    <p><a href="/clubs/{{ club.ref_name }}">Read more...</a></p>
+    {% endfor %}
+</section>
+<section>
+    <p><a href="/">Go back...</a></p>
+</section>
+{% endblock %}

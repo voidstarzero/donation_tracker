@@ -1,0 +1,14 @@
+# Python runtime files
+__pycache__/
+*.py[cod]
+
+# Virtualenv folders
+env/
+venv/
+virtualenv/
+
+# Deployment environment variables
+.env
+
+# Collected static site assets
+/static/

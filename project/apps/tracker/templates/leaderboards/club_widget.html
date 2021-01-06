@@ -1,0 +1,9 @@
+<h2>Club Leaderboard</h2>
+<div class="multi-table">
+    {% for club in clubs %}
+    <div class="multi-row">
+        <span><a href="/clubs/{{ club.ref_name }}">{{ club.short_name }}</a></span>
+        <strong>${{ club.balance.balance }}</strong>
+    </div>
+    {% endfor %}
+</div>

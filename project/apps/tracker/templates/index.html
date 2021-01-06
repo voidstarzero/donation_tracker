@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Charity unVigil Donation Tracker{% endblock %}
+
+{% block content %}
+<section>
+    <h1>Welcome to Charity <sup>un</sup>Vigil 2020!</h1>
+    <p>
+    Each year, the clubs of Cameron Hall band themselves together for a celebration
+    of our activities, and fundraising for vital local charities.
+    </p>
+    <p>
+    This year we're bringing charity to you in a new online format, with <em>Charity
+        <sup>un</sup>Vigil</em>. Running across multiple nights in week 10, each of the
+    clubs will be hosting an evening of fundraising activities to support
+    <a href="https://zontahouse.org.au/">Zonta House</a>, a Perth-based organisation
+    supporting women affected by domestic violence.
+    </p>
+    <p><a href="/about">Read more...</a></p>
+</section>
+<section>
+    <h2>What's On?</h2>
+    <h3>Right Now</h3>
+    <div class="multi-table">
+        {% for event in current_events %}
+        <div class="multi-row">
+            <a href="/events/{{ event.ref_name }}">{{ event.full_name }}</a>
+            <span>
+                {% with organizers=event.organizers.all %}
+                {% for organizer in organizers %}
+                {{ organizer.short_name }}{% if not forloop.last %},{% endif %}
+                {% endfor %}
+                {% endwith %}
+            </span>
+            <span>{{ event.start_time|date:"d/m, H:i" }} &ndash; {{ event.end_time|date:"d/m, H:i" }}</span>
+        </div>
+        {% endfor %}
+    </div>
+    <h3>Coming Up</h3>
+    <div class="multi-table">
+        {% for event in upcoming_events %}
+        <div class="multi-row">
+            <a href="/events/{{ event.ref_name }}">{{ event.full_name }}</a>
+            <span>
+                {% with organizers=event.organizers.all %}
+                {% for organizer in organizers %}
+                {{ organizer.short_name }}{% if not forloop.last %},{% endif %}
+                {% endfor %}
+                {% endwith %}
+            </span>
+            <span>{{ event.start_time|date:"d/m, H:i" }} &ndash; {{ event.end_time|date:"d/m, H:i" }}</span>
+        </div>
+        {% endfor %}
+    </div>
+    <p><a href="/events/list">More events...</a></p>
+    <p><a href="/leaderboards/by_event">See event leaderboard...</a></p>
+</section>
+<section>
+    {% include "leaderboards/attendee_widget.html" %}
+    <p><a href="/leaderboards/by_attendee">See the full rankings...</a></p>
+</section>
+{% endblock %}

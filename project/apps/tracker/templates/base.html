@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="/static/main.css">
+    </head>
+    <body>
+        <div id="fixed-banner">
+            <div class="edge-padding">
+                <header>
+                    {% include "header.html" %}
+                </header>
+            </div>
+        </div>
+        <div id="scroll-content">
+            <div class="edge-padding">
+                <main>
+                    <section>
+                        <p id="donation-total">
+                        <strong>${{ raised_total }}</strong> raised so far. Keep up the good work everyone!
+                        </p>
+                    </section>
+                    {% block content %}{% endblock %}
+                </main>
+                <footer>
+                    <div id="footer-content">
+                        <em>
+                            Donation tracker by James Arcus and Felix von Perger. Payments operated by
+			    {{ payment_business }}.
+                        </em>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </body>
+</html>

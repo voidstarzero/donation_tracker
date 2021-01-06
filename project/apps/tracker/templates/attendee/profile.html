@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load mathfilters %}
+
+{% block title %}Profile - Charity unVigil Donation Tracker{% endblock %}
+
+{% block content %}
+<section class="club-title">
+    <h1>Welcome, <em id="my-short-name">{{ user.first_name }}</em></h1>
+    {% with balance=attendee.balance %}
+    <p><strong>Current balance:</strong> ${{ balance.balance }}</p>
+    <p><strong>Donated so far:</strong> ${{ balance.cumulative|sub:balance.balance }}</p>
+    {% endwith %}
+    <div class="right pad-bottom">
+        <a href="/pay"><button class="button-good">Add balance</button></a>
+        <a href="/donate"><button class="button-good">Donate now!</button></a>
+    </div>
+</section>
+<section>
+    <h2>Your Contributions</h2>
+    <div class="multi-table pad-bottom">
+        {% for contrib in contributions %}
+        <div class="multi-row">
+            <span>
+                {{ contrib.timestamp|date:"d/m, H:i" }} &mdash;
+                <a href="/events/{{ contrib.event_to.ref_name }}">{{ contrib.event_to.full_name }}</a>
+            </span>
+            <strong>${{ contrib.amount }}</strong>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+<section>
+    <p><a href="/attendee/change_password">Click here to change your password.</a></p>
+</section>
+<section>
+    <p><a href="/">Go back...</a></p>
+</section>
+{% endblock %}

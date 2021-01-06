@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Make a Payment - Charity unVigil Donation Tracker{% endblock %}
+
+{% block content %}
+<section>
+    <h1>Make a Payment</h1>
+    <p>
+    Select an amount here to make a payment to Charity <sup>un</sup>Vigil 2020. After
+    you've paid, your donation will be available to assign to a specific event or
+    club.
+    </p>
+    <p>
+        <em>
+            Please note: you will be taken to the website of our payment processor,
+            Square, after pressing "Pay!"
+        </em>
+    </p>
+</section>
+<section class="pad-vertical">
+    <form method="get" action="/squarepay/">
+        <div class="pad-bottom">
+            <label for="amount-5-radio">$5</label>
+            <input type="radio" id="amount-5-radio" name="amount" value="5" checked>
+            <label for="amount-10-radio">$10</label>
+            <input type="radio" id="amount-10-radio" name="amount" value="10">
+        </div>
+        <div class="pad-bottom">
+            <label for="amount-20-radio">$20</label>
+            <input type="radio" id="amount-20-radio" name="amount" value="20">
+            <label for="amount-50-radio">$50</label>
+            <input type="radio" id="amount-50-radio" name="amount" value="50">
+        </div>
+        <div class="pad-bottom">
+            <label for="amount-custom-radio">Custom</label>
+            <input type="radio" id="amount-custom-radio" name="amount" value="0">
+            $<input name="custom" id="amount-custom-box" type="number" min="5" max="200">
+        </div>
+        <div class="input-div">
+            <input type="submit" value="Pay!" class="button-good">
+        </div>
+    </form>
+</section>
+<section>
+    <p><a href="/">Go back...</a></p>
+</section>
+{% endblock %}

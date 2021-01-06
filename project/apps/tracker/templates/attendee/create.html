@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Create an Account - Charity unVigil Donation Tracker{% endblock %}
+
+{% block content %}
+<section class="pad-bottom">
+    <h1>Create Your Donation Portal Account</h1>
+    <p>
+        To donate to events, or see more information, you'll need an account in our
+        system. Create one here, or <a href="/attendee/login">login to an existing account.</a>
+    </p>
+    <form method="post">
+        {% csrf_token %}
+        <div class="pad-bottom">
+            <label for="username-field">Username:</label>
+            <input name="username" id="username-field" type="text"
+                                                       minlength="3"
+                                                       maxlength="15">
+        </div>
+        <div class="pad-bottom">
+            <label for="first-name-field">First Name:</label>
+            <input name="first_name" id="first-name-field" type="text" maxlength=30>
+        </div>
+        <div>
+            <label for="last-name-field">Last Name:</label>
+            <input name="last_name" id="last-name-field" type="text" maxlength=150>
+        </div>
+        <hr class="form-rule">
+        <div class="pad-bottom">
+            <label for="email-field">Email:</label>
+            <input name="email" id="email-field" type="email">
+        </div>
+        <div class="pad-bottom">
+            <label for="password-field">Password:</label>
+            <input name="password" id="password-field" type="password"
+                                                       minlength="8"
+                                                       maxlength="50">
+        </div>
+        <div>
+            <label for="password-confirm-field">Password (again):</label>
+            <input name="password_confirm" id="password-confirm-field" type="password"
+                                                                       minlength="8"
+                                                                       maxlength="50">
+        </div>
+        <hr class="form-rule">
+        <p>
+        <strong>Which clubs are you a member of?</strong>
+        </p>
+        {% for club in clubs %}
+        <div>
+            <input type="checkbox" id="{{ club.ref_name }}-check" name="member_{{ club.ref_name }}">
+            <label for="{{ club.ref_name }}-check">{{ club.full_name }}</label>
+        </div>
+        {% endfor %}
+        <div class="input-div">
+            <input type="submit" value="Create Account" class="button-good">
+        </div>
+    </form>
+</section>
+<section>
+    <p><a href="/">Go back...</a></p>
+</section>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}{{ event.full_name }} - Charity unVigil 2020{% endblock %}
+
+{% block content %}
+<section>
+    <div class="content-button">
+        <h1>{{ event.full_name }}</h1>
+        <a href="/donate?event={{ event.ref_name }}">
+            <button class="button-good">Donate to this event!</button>
+        </a>
+    </div>
+    <div class="content-columns">
+        <div>
+            <p>
+                {% with organizers=event.organizers.all %}
+                <strong>
+                    {% if organizers|length > 1 %}
+                    Organizers:
+                    {% else %}
+                    Organizer:
+                    {% endif %}
+                </strong>
+                {% for organizer in organizers %}
+                {{ organizer.short_name }}{% if not forloop.last %},{% endif %}
+                {% endfor %}
+                {% endwith %}
+            </p>
+            <p><strong>Raised so far:</strong> ${{ event.balance.balance }}</p>
+        </div>
+        <div>
+            <p><em>Start:</em> {{ event.start_time|date:"d/m, H:i" }}</p>
+            <p><em>End:</em> {{ event.end_time|date:"d/m, H:i" }}</p>
+        </div>
+    </div>
+</section>
+<section>
+    <h2>Description</h2>
+    <p>{{ event.description }}</p>
+    <p>
+	<strong>See more:</strong>
+	<a href="{{ event.page_link }}">{{ event.page_link }}</a>
+    </p>
+</section>
+<section>
+    <h2>Event Contributions</h2>
+    <div class="multi-table pad-bottom">
+        {% for contrib in contributions %}
+        <div class="multi-row">
+            <span>
+                {{ contrib.timestamp|date:"d/m, H:i" }} &mdash;
+                {% with user=contrib.attendee_from.user %}
+                {{ user.first_name }} {{ user.last_name }} ({{ user.username }})
+                {% endwith %}
+            </span>
+            <strong>${{ contrib.amount }}</strong>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+<section>
+    <p><a href="/">Go back...</a></p>
+</section>
+{% endblock %}

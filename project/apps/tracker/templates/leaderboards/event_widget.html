@@ -1,0 +1,16 @@
+<h2>Event Leaderboard</h2>
+<div class="multi-table">
+    {% for event in events %}
+    <div class="multi-row">
+        <a href="/events/{{ event.ref_name }}">{{ event.full_name }}</a>
+        <span>
+            {% with organizers=event.organizers.all %}
+            {% for organizer in organizers %}
+            {{ organizer.short_name }}{% if not forloop.last %},{% endif %}
+            {% endfor %}
+            {% endwith %}
+        </span>
+        <strong>${{ event.balance.balance }}</strong>
+    </div>
+    {% endfor %}
+</div>

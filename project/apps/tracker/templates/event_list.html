@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}Events - Charity unVigil 2020{% endblock %}
+
+{% block content %}
+<section>
+    <h1>Charity <sup>un</sup>Vigil Events</h1>
+    <p>
+        Here is a full list of events running as part of Charity <sup>un</sup>Vigil 2020. Or,
+        <a href="/leaderboards/by_event">see how well they're going here.</a>
+    </p>
+</section>
+
+<section>
+    <h2>Currently Running</h2>
+</section>
+{% for event in current_events %}
+<section>
+    <h3>{{ event.full_name }}</h3>
+    <div class="event-info">
+        <span>
+            {% with organizers=event.organizers.all %}
+            {% for organizer in organizers %}
+            {{ organizer.short_name }}{% if not forloop.last %},{% endif %}
+            {% endfor %}
+            {% endwith %}
+        </span>
+        &mdash;
+        <span>{{ event.start_time|date:"d/m, H:i" }} &ndash; {{ event.end_time|date:"d/m, H:i" }}</span>
+    </div>
+    <p>{{ event.description|truncatewords:24 }}</p>
+    <p><a href="/events/{{ event.ref_name }}">Find out more...</a></p>
+</section>
+{% endfor %}
+
+<section>
+    <h2>Upcoming</h2>
+</section>
+{% for event in upcoming_events %}
+<section>
+    <h3>{{ event.full_name }}</h3>
+    <div class="event-info">
+        <span>
+            {% with organizers=event.organizers.all %}
+            {% for organizer in organizers %}
+            {{ organizer.short_name }}{% if not forloop.last %},{% endif %}
+            {% endfor %}
+            {% endwith %}
+        </span>
+        &mdash;
+        <span>{{ event.start_time|date:"d/m, H:i" }} &ndash; {{ event.end_time|date:"d/m, H:i" }}</span>
+    </div>
+    <p>{{ event.description|truncatewords:24 }}</p>
+    <p><a href="/events/{{ event.ref_name }}">Find out more...</a></p>
+</section>
+{% endfor %}
+
+<section>
+    <h2>Past Events</h2>
+</section>
+{% for event in past_events %}
+<section>
+    <h3>{{ event.full_name }}</h3>
+    <div class="event-info">
+        <span>
+            {% with organizers=event.organizers.all %}
+            {% for organizer in organizers %}
+            {{ organizer.short_name }}{% if not forloop.last %},{% endif %}
+            {% endfor %}
+            {% endwith %}
+        </span>
+        &mdash;
+        <span>{{ event.start_time|date:"d/m, H:i" }} &ndash; {{ event.end_time|date:"d/m, H:i" }}</span>
+    </div>
+    <p>{{ event.description|truncatewords:24 }}</p>
+    <p><a href="/events/{{ event.ref_name }}">Find out more...</a></p>
+</section>
+{% endfor %}
+
+<section>
+    <p><a href="/">Go back...</a></p>
+</section>
+{% endblock %}

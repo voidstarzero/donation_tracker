@@ -1,0 +1,13 @@
+<h2>Top Donors</h2>
+<div class="multi-table">
+    {% for attendee in attendees %}
+    <div class="multi-row">
+        <span>
+            {{ attendee.user.first_name }}
+            {{ attendee.user.last_name }}
+            ({{ attendee.user.username }})
+        </span>
+        <strong>${{ attendee.balance.cumulative }}</strong>
+    </div>
+    {% endfor %}
+</div>
