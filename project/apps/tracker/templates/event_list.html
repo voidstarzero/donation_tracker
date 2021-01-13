@@ -29,7 +29,7 @@
         <span>{{ event.start_time|date:"d/m, H:i" }} &ndash; {{ event.end_time|date:"d/m, H:i" }}</span>
     </div>
     <p>{{ event.description|truncatewords:24 }}</p>
-    <p><a href="/events/{{ event.ref_name }}">Find out more...</a></p>
+    <p><a href="/event/{{ event.ref_name }}">Find out more...</a></p>
 </section>
 {% endfor %}
 
@@ -51,7 +51,7 @@
         <span>{{ event.start_time|date:"d/m, H:i" }} &ndash; {{ event.end_time|date:"d/m, H:i" }}</span>
     </div>
     <p>{{ event.description|truncatewords:24 }}</p>
-    <p><a href="/events/{{ event.ref_name }}">Find out more...</a></p>
+    <p><a href="/event/{{ event.ref_name }}">Find out more...</a></p>
 </section>
 {% endfor %}
 
@@ -73,7 +73,7 @@
         <span>{{ event.start_time|date:"d/m, H:i" }} &ndash; {{ event.end_time|date:"d/m, H:i" }}</span>
     </div>
     <p>{{ event.description|truncatewords:24 }}</p>
-    <p><a href="/events/{{ event.ref_name }}">Find out more...</a></p>
+    <p><a href="/event/{{ event.ref_name }}">Find out more...</a></p>
 </section>
 {% endfor %}
 

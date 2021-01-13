@@ -2,7 +2,7 @@
 <div class="multi-table">
     {% for event in events %}
     <div class="multi-row">
-        <a href="/events/{{ event.ref_name }}">{{ event.full_name }}</a>
+        <a href="/event/{{ event.ref_name }}">{{ event.full_name }}</a>
         <span>
             {% with organizers=event.organizers.all %}
             {% for organizer in organizers %}

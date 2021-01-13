@@ -14,7 +14,7 @@
     <div class="multi-table">
         {% for event in current_events %}
         <div class="multi-row">
-            <a href="/events/{{ event.ref_name }}">{{ event.full_name }}</a>
+            <a href="/event/{{ event.ref_name }}">{{ event.full_name }}</a>
             <span>
                 {% with organizers=event.organizers.all %}
                 {% for organizer in organizers %}
@@ -30,7 +30,7 @@
     <div class="multi-table">
         {% for event in upcoming_events %}
         <div class="multi-row">
-            <a href="/events/{{ event.ref_name }}">{{ event.full_name }}</a>
+            <a href="/event/{{ event.ref_name }}">{{ event.full_name }}</a>
             <span>
                 {% with organizers=event.organizers.all %}
                 {% for organizer in organizers %}
@@ -42,7 +42,7 @@
         </div>
         {% endfor %}
     </div>
-    <p><a href="/events/list">More events...</a></p>
+    <p><a href="/event/list">More events...</a></p>
     <p><a href="/leaderboard/by_event">See event leaderboard...</a></p>
 </section>
 <section>
