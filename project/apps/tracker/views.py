@@ -39,17 +39,6 @@ def about(request):
     }
     return render(request, 'about.html', context)
 
-def leaderboard_overview(request):
-    context = {
-        'payment_business': os.environ['PAYMENT_BUSINESS_DETAILS'],
-            'campaign_name': os.environ['TRACKER_CAMPAIGN_NAME'],
-        'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
-        'attendees': Attendee.objects.all().order_by('-balance__cumulative')[:3],
-        'events': Event.objects.all().order_by('-balance__balance')[:5],
-        'clubs': Club.objects.all().order_by('-balance__balance')[:3],
-    }
-    return render(request, 'leaderboards/index.html', context)
-
 def leaderboard_by_attendee(request):
     context = {
         'payment_business': os.environ['PAYMENT_BUSINESS_DETAILS'],
@@ -57,7 +46,7 @@ def leaderboard_by_attendee(request):
         'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
         'attendees': Attendee.objects.all().order_by('-balance__cumulative'),
     }
-    return render(request, 'leaderboards/by_attendee.html', context)
+    return render(request, 'leaderboard/by_attendee.html', context)
 
 def leaderboard_by_event(request):
     context = {
@@ -66,7 +55,7 @@ def leaderboard_by_event(request):
         'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
         'events': Event.objects.all().order_by('-balance__balance'),
     }
-    return render(request, 'leaderboards/by_event.html', context)
+    return render(request, 'leaderboard/by_event.html', context)
 
 def event_list(request):
     now = datetime.now()

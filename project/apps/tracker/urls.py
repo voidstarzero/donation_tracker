@@ -4,9 +4,8 @@ from . import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('about', views.about, name='about'),
-    path('leaderboards/', views.leaderboard_overview, name='leaderboard'),
-    path('leaderboards/by_attendee', views.leaderboard_by_attendee, name='leaderboard_by_attendee'),
-    path('leaderboards/by_event', views.leaderboard_by_event, name='leaderboard_by_event'),
+    path('leaderboard/by_attendee', views.leaderboard_by_attendee, name='leaderboard_by_attendee'),
+    path('leaderboard/by_event', views.leaderboard_by_event, name='leaderboard_by_event'),
     path('events/list', views.event_list, name='event_list'),
     path('events/<str:event>', views.event_details, name='event_details'),
     path('clubs/<str:club>', views.club_details, name='club_details'),

@@ -43,10 +43,10 @@
         {% endfor %}
     </div>
     <p><a href="/events/list">More events...</a></p>
-    <p><a href="/leaderboards/by_event">See event leaderboard...</a></p>
+    <p><a href="/leaderboard/by_event">See event leaderboard...</a></p>
 </section>
 <section>
-    {% include "leaderboards/attendee_widget.html" %}
-    <p><a href="/leaderboards/by_attendee">See the full rankings...</a></p>
+    {% include "leaderboard/attendee_widget.html" %}
+    <p><a href="/leaderboard/by_attendee">See the full rankings...</a></p>
 </section>
 {% endblock %}
