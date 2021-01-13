@@ -19,6 +19,7 @@ def index(request):
     now = datetime.now()
     context = {
             'payment_business': os.environ['PAYMENT_BUSINESS_DETAILS'],
+            'campaign_name': os.environ['TRACKER_CAMPAIGN_NAME'],
             'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
             'current_events': (Event.objects.filter(start_time__lte=now)
                                             .filter(end_time__gte=now)
@@ -32,6 +33,7 @@ def index(request):
 def about(request):
     context = {
         'payment_business': os.environ['PAYMENT_BUSINESS_DETAILS'],
+            'campaign_name': os.environ['TRACKER_CAMPAIGN_NAME'],
         'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
         'clubs': Club.objects.all(),
     }
@@ -40,6 +42,7 @@ def about(request):
 def leaderboard_overview(request):
     context = {
         'payment_business': os.environ['PAYMENT_BUSINESS_DETAILS'],
+            'campaign_name': os.environ['TRACKER_CAMPAIGN_NAME'],
         'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
         'attendees': Attendee.objects.all().order_by('-balance__cumulative')[:3],
         'events': Event.objects.all().order_by('-balance__balance')[:5],
@@ -50,6 +53,7 @@ def leaderboard_overview(request):
 def leaderboard_by_attendee(request):
     context = {
         'payment_business': os.environ['PAYMENT_BUSINESS_DETAILS'],
+            'campaign_name': os.environ['TRACKER_CAMPAIGN_NAME'],
         'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
         'attendees': Attendee.objects.all().order_by('-balance__cumulative'),
     }
@@ -58,6 +62,7 @@ def leaderboard_by_attendee(request):
 def leaderboard_by_event(request):
     context = {
         'payment_business': os.environ['PAYMENT_BUSINESS_DETAILS'],
+            'campaign_name': os.environ['TRACKER_CAMPAIGN_NAME'],
         'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
         'events': Event.objects.all().order_by('-balance__balance'),
     }
@@ -66,6 +71,7 @@ def leaderboard_by_event(request):
 def leaderboard_by_club(request):
     context = {
         'payment_business': os.environ['PAYMENT_BUSINESS_DETAILS'],
+            'campaign_name': os.environ['TRACKER_CAMPAIGN_NAME'],
         'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
         'clubs': Club.objects.all().order_by('-balance__balance'),
     }
@@ -75,6 +81,7 @@ def event_list(request):
     now = datetime.now()
     context = {
         'payment_business': os.environ['PAYMENT_BUSINESS_DETAILS'],
+            'campaign_name': os.environ['TRACKER_CAMPAIGN_NAME'],
         'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
         'current_events': (Event.objects.filter(start_time__lte=now)
                                         .filter(end_time__gte=now)
@@ -91,6 +98,7 @@ def event_details(request, event):
     try:
         context = {
             'payment_business': os.environ['PAYMENT_BUSINESS_DETAILS'],
+            'campaign_name': os.environ['TRACKER_CAMPAIGN_NAME'],
             'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
             'event': Event.objects.get(ref_name=event),
             'contributions': Donation.objects.filter(event_to=event).order_by('-timestamp'),
@@ -104,6 +112,7 @@ def club_details(request, club):
     try:
         context = {
             'payment_business': os.environ['PAYMENT_BUSINESS_DETAILS'],
+            'campaign_name': os.environ['TRACKER_CAMPAIGN_NAME'],
             'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
             'club': Club.objects.get(ref_name=club),
         }
@@ -148,6 +157,7 @@ def donate(request):
     elif request.method == 'GET':
         context = {
             'payment_business': os.environ['PAYMENT_BUSINESS_DETAILS'],
+            'campaign_name': os.environ['TRACKER_CAMPAIGN_NAME'],
             'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
             'events': Event.objects.all(),
             'selected': request.GET.get('event'),
@@ -158,6 +168,7 @@ def donate(request):
 def pay(request):
     context = {
         'payment_business': os.environ['PAYMENT_BUSINESS_DETAILS'],
+            'campaign_name': os.environ['TRACKER_CAMPAIGN_NAME'],
         'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
     }
     return render(request, 'pay.html', context)
@@ -185,6 +196,7 @@ def change_password(request):
     elif request.method == 'GET':
         context = {
             'payment_business': os.environ['PAYMENT_BUSINESS_DETAILS'],
+            'campaign_name': os.environ['TRACKER_CAMPAIGN_NAME'],
             'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
         }
         return render(request, 'attendee/change_password.html', context)
@@ -239,6 +251,7 @@ def create_attendee(request):
     elif request.method == 'GET':
         context = {
             'payment_business': os.environ['PAYMENT_BUSINESS_DETAILS'],
+            'campaign_name': os.environ['TRACKER_CAMPAIGN_NAME'],
             'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
             'clubs': Club.objects.all().order_by('short_name'),
         }
@@ -263,6 +276,7 @@ def login(request):
     elif request.method == 'GET':
         context = {
             'payment_business': os.environ['PAYMENT_BUSINESS_DETAILS'],
+            'campaign_name': os.environ['TRACKER_CAMPAIGN_NAME'],
             'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
         }
         return render(request, 'attendee/login.html', context)
@@ -276,6 +290,7 @@ def logout(request):
     elif request.method == 'GET':
         context = {
             'payment_business': os.environ['PAYMENT_BUSINESS_DETAILS'],
+            'campaign_name': os.environ['TRACKER_CAMPAIGN_NAME'],
             'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
         }
         return render(request, 'attendee/logout.html', context)
@@ -284,6 +299,7 @@ def logout(request):
 def attendee_profile(request):
     context = {
         'payment_business': os.environ['PAYMENT_BUSINESS_DETAILS'],
+            'campaign_name': os.environ['TRACKER_CAMPAIGN_NAME'],
         'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
         'attendee': Attendee.objects.get(user=request.user.id),
         'contributions': Donation.objects.filter(attendee_from=request.user.id).order_by('-timestamp'),
