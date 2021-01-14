@@ -64,6 +64,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'project.common.context.environment',
+                'project.apps.tracker.context.statistics',
             ],
         },
     },

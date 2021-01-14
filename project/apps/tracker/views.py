@@ -20,7 +20,6 @@ from .utils import login_forbidden, meets_pw_requirements
 def index(request):
     now = datetime.now()
     context = {
-        'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
         'current_events': (Event.objects.filter(start_time__lte=now)
                                         .filter(end_time__gte=now)
                                         .order_by('start_time')),
@@ -32,21 +31,18 @@ def index(request):
 
 def about(request):
     context = {
-        'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
         'clubs': Club.objects.all(),
     }
     return render(request, 'about.html', context)
 
 def leaderboard_by_attendee(request):
     context = {
-        'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
         'attendees': Attendee.objects.all().order_by('-balance__cumulative'),
     }
     return render(request, 'leaderboard/by_attendee.html', context)
 
 def leaderboard_by_event(request):
     context = {
-        'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
         'events': Event.objects.all().order_by('-balance__balance'),
     }
     return render(request, 'leaderboard/by_event.html', context)
@@ -54,7 +50,6 @@ def leaderboard_by_event(request):
 def event_list(request):
     now = datetime.now()
     context = {
-        'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
         'current_events': (Event.objects.filter(start_time__lte=now)
                                         .filter(end_time__gte=now)
                                         .order_by('start_time')),
@@ -69,7 +64,6 @@ def event_list(request):
 def event_details(request, event):
     try:
         context = {
-            'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
             'event': Event.objects.get(ref_name=event),
             'contributions': Donation.objects.filter(event_to=event).order_by('-timestamp'),
         }
@@ -81,7 +75,6 @@ def event_details(request, event):
 def club_details(request, club):
     try:
         context = {
-            'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
             'club': Club.objects.get(ref_name=club),
         }
         return render(request, 'club.html', context)
@@ -124,7 +117,6 @@ def donate(request):
 
     elif request.method == 'GET':
         context = {
-            'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
             'events': Event.objects.all(),
             'selected': request.GET.get('event'),
         }
@@ -132,9 +124,6 @@ def donate(request):
 
 @login_required(login_url='/attendee/login')
 def pay(request):
-    context = {
-        'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
-    }
     return render(request, 'pay.html', context)
 
 @login_required(login_url='/attendee/login')
@@ -158,9 +147,6 @@ def change_password(request):
             raise SuspiciousOperation('Wrong parameters to change password')
 
     elif request.method == 'GET':
-        context = {
-            'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
-        }
         return render(request, 'attendee/change_password.html', context)
 
 @login_forbidden(redirect_to='/attendee/logout')
@@ -212,7 +198,6 @@ def create_attendee(request):
 
     elif request.method == 'GET':
         context = {
-            'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
             'clubs': Club.objects.all().order_by('short_name'),
         }
         return render(request, 'attendee/create.html', context)
@@ -234,9 +219,6 @@ def login(request):
             raise SuspiciousOperation('Wrong parameters to login')
 
     elif request.method == 'GET':
-        context = {
-            'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
-        }
         return render(request, 'attendee/login.html', context)
 
 @login_required(login_url='/attendee/login')
@@ -246,15 +228,11 @@ def logout(request):
         return HttpResponseRedirect('/')
 
     elif request.method == 'GET':
-        context = {
-            'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
-        }
         return render(request, 'attendee/logout.html', context)
 
 @login_required(login_url='/attendee/login')
 def attendee_profile(request):
     context = {
-        'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
         'attendee': Attendee.objects.get(user=request.user.id),
         'contributions': Donation.objects.filter(attendee_from=request.user.id).order_by('-timestamp'),
     }
