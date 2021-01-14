@@ -1,6 +1,7 @@
-from django.db import models
 from django.contrib import auth
+from django.db import models
 
+# Base user model
 User = auth.get_user_model()
 
 # Holds the current balance for Attendees and Events
@@ -25,7 +26,7 @@ class Club(models.Model):
     balance     = models.OneToOneField(Balance, related_name='club_owner', on_delete=models.PROTECT, null=True)
 
     def __str__(self):
-        return self.full_name
+        return '{} ({})'.format(self.ref_name, self.full_name)
 
 class Attendee(models.Model):
     user    = models.OneToOneField(User, primary_key=True, related_name='attendee_info', on_delete=models.CASCADE)
@@ -46,6 +47,9 @@ class Event(models.Model):
     balance     = models.OneToOneField(Balance, related_name='event_owner', on_delete=models.PROTECT, null=True)
     organizers  = models.ManyToManyField(Club, related_name='events')
 
+    def __str__(self):
+        return '{} ({})'.format(self.ref_name, self.full_name)
+
 # From Attendees, to Events
 class Donation(models.Model):
     amount          = models.IntegerField(null=False, blank=False)
@@ -56,4 +60,4 @@ class Donation(models.Model):
     def __str__(self):
         attendee = self.attendee_from
         event = self.event_to
-        return '{} to {} (${})'.format(attendee.user.username, event.full_name, self.amount)
+        return '{} to {} (${})'.format(attendee.user.username, event.ref_name, self.amount)
