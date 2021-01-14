@@ -1,14 +1,16 @@
-from django.http import HttpResponse, HttpResponseRedirect, Http404
-from django.shortcuts import render
-from django.core.exceptions import ObjectDoesNotExist, SuspiciousOperation
-from django.contrib.auth.decorators import login_required
-from django.db.models import Sum
-import django.contrib.auth as auth
-from django.contrib.auth.models import User
-from django.db import transaction
+import os
 
 from datetime import datetime
-import os
+
+import django.contrib.auth as auth
+
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist, SuspiciousOperation
+from django.db import transaction
+from django.db.models import Sum
+from django.http import HttpResponse, HttpResponseRedirect, Http404
+from django.shortcuts import render
 
 from .models import Club, Event, Attendee, Donation, Balance
 from .utils import login_forbidden, meets_pw_requirements
@@ -18,22 +20,22 @@ from .utils import login_forbidden, meets_pw_requirements
 def index(request):
     now = datetime.now()
     context = {
-            'payment_business': os.environ['PAYMENT_BUSINESS_DETAILS'],
-            'campaign_name': os.environ['TRACKER_CAMPAIGN_NAME'],
-            'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
-            'current_events': (Event.objects.filter(start_time__lte=now)
-                                            .filter(end_time__gte=now)
-                                            .order_by('start_time')),
-            'upcoming_events': (Event.objects.filter(start_time__gte=now)
-                                             .order_by('start_time'))[:5],
-            'attendees': Attendee.objects.all().order_by('-balance__cumulative')[:3],
+        'payment_business': os.environ['PAYMENT_BUSINESS_DETAILS'],
+        'campaign_name': os.environ['TRACKER_CAMPAIGN_NAME'],
+        'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
+        'current_events': (Event.objects.filter(start_time__lte=now)
+                                        .filter(end_time__gte=now)
+                                        .order_by('start_time')),
+        'upcoming_events': (Event.objects.filter(start_time__gte=now)
+                                         .order_by('start_time'))[:5],
+        'attendees': Attendee.objects.all().order_by('-balance__cumulative')[:3],
     }
     return render(request, 'index.html', context)
 
 def about(request):
     context = {
         'payment_business': os.environ['PAYMENT_BUSINESS_DETAILS'],
-            'campaign_name': os.environ['TRACKER_CAMPAIGN_NAME'],
+        'campaign_name': os.environ['TRACKER_CAMPAIGN_NAME'],
         'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
         'clubs': Club.objects.all(),
     }
@@ -42,7 +44,7 @@ def about(request):
 def leaderboard_by_attendee(request):
     context = {
         'payment_business': os.environ['PAYMENT_BUSINESS_DETAILS'],
-            'campaign_name': os.environ['TRACKER_CAMPAIGN_NAME'],
+        'campaign_name': os.environ['TRACKER_CAMPAIGN_NAME'],
         'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
         'attendees': Attendee.objects.all().order_by('-balance__cumulative'),
     }
@@ -51,7 +53,7 @@ def leaderboard_by_attendee(request):
 def leaderboard_by_event(request):
     context = {
         'payment_business': os.environ['PAYMENT_BUSINESS_DETAILS'],
-            'campaign_name': os.environ['TRACKER_CAMPAIGN_NAME'],
+        'campaign_name': os.environ['TRACKER_CAMPAIGN_NAME'],
         'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
         'events': Event.objects.all().order_by('-balance__balance'),
     }
@@ -61,7 +63,7 @@ def event_list(request):
     now = datetime.now()
     context = {
         'payment_business': os.environ['PAYMENT_BUSINESS_DETAILS'],
-            'campaign_name': os.environ['TRACKER_CAMPAIGN_NAME'],
+        'campaign_name': os.environ['TRACKER_CAMPAIGN_NAME'],
         'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
         'current_events': (Event.objects.filter(start_time__lte=now)
                                         .filter(end_time__gte=now)
@@ -148,7 +150,7 @@ def donate(request):
 def pay(request):
     context = {
         'payment_business': os.environ['PAYMENT_BUSINESS_DETAILS'],
-            'campaign_name': os.environ['TRACKER_CAMPAIGN_NAME'],
+        'campaign_name': os.environ['TRACKER_CAMPAIGN_NAME'],
         'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
     }
     return render(request, 'pay.html', context)
@@ -279,7 +281,7 @@ def logout(request):
 def attendee_profile(request):
     context = {
         'payment_business': os.environ['PAYMENT_BUSINESS_DETAILS'],
-            'campaign_name': os.environ['TRACKER_CAMPAIGN_NAME'],
+        'campaign_name': os.environ['TRACKER_CAMPAIGN_NAME'],
         'raised_total': Event.objects.aggregate(Sum('balance__balance'))['balance__balance__sum'],
         'attendee': Attendee.objects.get(user=request.user.id),
         'contributions': Donation.objects.filter(attendee_from=request.user.id).order_by('-timestamp'),
