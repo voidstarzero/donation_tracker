@@ -8,19 +8,18 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
-from dotenv import load_dotenv
 import os
+
+from dotenv import load_dotenv
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Load project-specific variables from the root .env file
 load_dotenv(dotenv_path=BASE_DIR / '.env', verbose=True)
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
+# Store the secret key in the environment for security
 SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -71,9 +70,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'project.wsgi.donation_tracker'
 
+LOGIN_REDIRECT_URL = '/'
+LOGGED_IN_HOME = '/'
+
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+# Read the database configuration from the environment, with defaults
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -108,6 +111,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # Globalization (i18n/l10n)
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
+# In general, accept ISO and UK date/time formats for my own sanity
+
 DATE_FORMAT = 'j F Y' # 1 April 2021
 # Accept 2021-04-01, 01/04/2021, 01/04/21
 DATE_INPUT_FORMATS = ['%Y-%m-%d', '%d/%m/%Y', '%d/%m/%y']
@@ -137,6 +142,8 @@ TIME_INPUT_FORMATS = [
 
 TIME_ZONE = 'UTC'
 
+# No i18n or l10n provided yet. TODO, I guess?
+
 USE_I18N = False
 USE_L10N = False
 
@@ -149,6 +156,3 @@ YEAR_MONTH_FORMAT = 'F Y'
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'static/'
-
-LOGIN_REDIRECT_URL = '/'
-LOGGED_IN_HOME = '/'
