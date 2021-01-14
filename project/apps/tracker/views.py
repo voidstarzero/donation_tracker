@@ -74,8 +74,13 @@ def event_details(request, event):
 
 def club_details(request, club):
     try:
+        now = datetime.now()
+        club = Club.objects.get(ref_name=club)
         context = {
-            'club': Club.objects.get(ref_name=club),
+            'club': club,
+            'top_events': club.events.order_by('-balance__balance')[:5],
+            'upcoming_events': (club.events.filter(start_time__gte=now)
+                                           .order_by('start_time'))[:5],
         }
         return render(request, 'club.html', context)
 
