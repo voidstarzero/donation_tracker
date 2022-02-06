@@ -129,7 +129,7 @@ def donate(request):
 
 @login_required(login_url='/attendee/login')
 def pay(request):
-    return render(request, 'pay.html', context)
+    return render(request, 'pay.html')
 
 @login_required(login_url='/attendee/login')
 def change_password(request):
@@ -152,7 +152,7 @@ def change_password(request):
             raise SuspiciousOperation('Wrong parameters to change password')
 
     elif request.method == 'GET':
-        return render(request, 'attendee/change_password.html', context)
+        return render(request, 'attendee/change_password.html')
 
 @login_forbidden(redirect_to='/attendee/logout')
 def create_attendee(request):
@@ -224,7 +224,7 @@ def login(request):
             raise SuspiciousOperation('Wrong parameters to login')
 
     elif request.method == 'GET':
-        return render(request, 'attendee/login.html', context)
+        return render(request, 'attendee/login.html')
 
 @login_required(login_url='/attendee/login')
 def logout(request):
@@ -233,7 +233,7 @@ def logout(request):
         return HttpResponseRedirect('/')
 
     elif request.method == 'GET':
-        return render(request, 'attendee/logout.html', context)
+        return render(request, 'attendee/logout.html')
 
 @login_required(login_url='/attendee/login')
 def attendee_profile(request):
