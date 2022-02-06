@@ -25,7 +25,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.122.195']
+ALLOWED_HOSTS = ['127.0.0.1']
 
 # Application definition
 
@@ -80,13 +80,17 @@ LOGGED_IN_HOME = '/'
 
 # Read the database configuration from the environment, with defaults
 DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': os.environ.get('DB_DBNAME', 'donation_tracker'),
+#        'USER': os.environ.get('DB_USERNAME', 'donation_tracker_webserver'),
+#        'PASSWORD': os.environ['DB_PASSWORD'],
+#        'HOST': os.environ.get('DB_HOSTNAME', 'localhost'),
+#        'PORT': os.environ.get('DB_PORT', '5432'),
+#    }
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_DBNAME', 'donation_tracker'),
-        'USER': os.environ.get('DB_USERNAME', 'donation_tracker_webserver'),
-        'PASSWORD': os.environ['DB_PASSWORD'],
-        'HOST': os.environ.get('DB_HOSTNAME', 'localhost'),
-        'PORT': os.environ.get('DB_PORT', '5432'),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'test.db',
     }
 }
 

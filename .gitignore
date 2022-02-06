@@ -12,3 +12,6 @@ virtualenv/
 
 # Collected static site assets
 /static/
+
+# Sqlite database files
+*.db
