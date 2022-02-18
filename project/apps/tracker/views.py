@@ -108,6 +108,12 @@ def donate(request):
                     event.balance.cumulative += amount
                     event.balance.save()
 
+                    # Give money to each organizer
+                    for club in event.organizers.all():
+                        club.balance.balance += amount
+                        club.balance.cumulative += amount
+                        club.balance.save()
+
                     # Record the transaction
                     record = Donation(amount=amount, attendee_from=attendee, event_to=event)
                     record.save()
