@@ -305,3 +305,13 @@ input[type=checkbox] + label {
     padding-top: 1.2rem;
     padding-bottom: 1.2rem;
 }
+
+.event-list-item + .event-list-header,
+#return-box {
+    margin-top: 2em;
+}
+
+.event-list-item {
+    margin-left: 1em;
+    margin-right: 1em;
+}

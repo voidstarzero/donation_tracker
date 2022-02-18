@@ -11,12 +11,17 @@
     </p>
 </section>
 
-<section>
+<section class="event-list-header">
     <h2>Currently Running</h2>
 </section>
 {% for event in current_events %}
-<section>
-    <h3>{{ event.full_name }}</h3>
+<section class="event-list-item">
+    <div class="content-button">
+        <h3>{{ event.full_name }}</h3>
+        <a href="/donate?event={{ event.ref_name }}">
+            <button class="button-good">Donate to this event!</button>
+        </a>
+    </div>
     <div class="event-info">
         <span>
             {% with organizers=event.organizers.all %}
@@ -33,12 +38,17 @@
 </section>
 {% endfor %}
 
-<section>
+<section class="event-list-header">
     <h2>Upcoming</h2>
 </section>
 {% for event in upcoming_events %}
-<section>
-    <h3>{{ event.full_name }}</h3>
+<section class="event-list-item">
+    <div class="content-button">
+        <h3>{{ event.full_name }}</h3>
+        <a href="/donate?event={{ event.ref_name }}">
+            <button class="button-good">Donate to this event!</button>
+        </a>
+    </div>
     <div class="event-info">
         <span>
             {% with organizers=event.organizers.all %}
@@ -55,12 +65,17 @@
 </section>
 {% endfor %}
 
-<section>
+<section class="event-list-header">
     <h2>Past Events</h2>
 </section>
 {% for event in past_events %}
-<section>
-    <h3>{{ event.full_name }}</h3>
+<section class="event-list-item">
+    <div class="content-button">
+        <h3>{{ event.full_name }}</h3>
+        <a href="/donate?event={{ event.ref_name }}">
+            <button class="button-good">Donate to this event!</button>
+        </a>
+    </div>
     <div class="event-info">
         <span>
             {% with organizers=event.organizers.all %}
@@ -77,7 +92,7 @@
 </section>
 {% endfor %}
 
-<section>
+<section id="return-box">
     <p><a href="/">Go back...</a></p>
 </section>
 {% endblock %}
