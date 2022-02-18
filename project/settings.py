@@ -146,7 +146,7 @@ TIME_INPUT_FORMATS = [
     '%H:%M',
 ]
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Australia/Perth'
 
 # No i18n or l10n provided yet. TODO, I guess?
 
